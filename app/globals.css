@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme - Modern brand colors */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    /* Brand primary - Modern blue */
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Brand secondary - Warm accent */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    /* Muted colors for subtle elements */
+    --muted: 210 40% 96%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    /* Accent color - Purple brand accent */
+    --accent: 262 83% 58%;
+    --accent-foreground: 210 40% 98%;
+
+    /* Destructive for errors */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Border and input colors */
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221 83% 53%;
+    --radius: 0.75rem;
+
+    /* Category colors */
+    --category-ai: 221 83% 53%;
+    --category-ai-light: 221 83% 95%;
+    --category-development: 142 76% 36%;
+    --category-development-light: 142 76% 95%;
+    --category-design: 262 83% 58%;
+    --category-design-light: 262 83% 95%;
+    --category-business: 25 95% 53%;
+    --category-business-light: 25 95% 95%;
+    --category-security: 0 72% 51%;
+    --category-security-light: 0 72% 95%;
+  }
+
+  .dark {
+    /* Dark theme - Rich, professional colors */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Brand primary - Brighter blue for dark mode */
+    --primary: 221 83% 63%;
+    --primary-foreground: 240 10% 3.9%;
+
+    /* Brand secondary - Darker secondary */
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Muted colors for dark theme */
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    /* Accent color - Vibrant purple for dark mode */
+    --accent: 262 83% 68%;
+    --accent-foreground: 240 10% 3.9%;
+
+    /* Destructive for errors */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Border and input colors */
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 221 83% 63%;
+
+    /* Category colors for dark mode */
+    --category-ai: 221 83% 68%;
+    --category-ai-light: 221 83% 15%;
+    --category-development: 142 76% 46%;
+    --category-development-light: 142 76% 15%;
+    --category-design: 262 83% 68%;
+    --category-design-light: 262 83% 15%;
+    --category-business: 25 95% 63%;
+    --category-business-light: 25 95% 15%;
+    --category-security: 0 72% 61%;
+    --category-security-light: 0 72% 15%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Category-specific utilities */
+@layer utilities {
+  .category-ai {
+    --category-color: var(--category-ai);
+    --category-bg: var(--category-ai-light);
+  }
+
+  .category-development {
+    --category-color: var(--category-development);
+    --category-bg: var(--category-development-light);
+  }
+
+  .category-design {
+    --category-color: var(--category-design);
+    --category-bg: var(--category-design-light);
+  }
+
+  .category-business {
+    --category-color: var(--category-business);
+    --category-bg: var(--category-business-light);
+  }
+
+  .category-security {
+    --category-color: var(--category-security);
+    --category-bg: var(--category-security-light);
+  }
+
+  .bg-brand-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  }
+
+  .text-brand-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
