@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ["class"], // Ensure darkMode is properly set
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -63,6 +63,34 @@ module.exports = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        // Category colors - defined directly in Tailwind
+        category: {
+          ai: {
+            DEFAULT: "#3b82f6", // Blue
+            light: "#eff6ff",
+            dark: "#1e3a8a",
+          },
+          development: {
+            DEFAULT: "#10b981", // Green
+            light: "#ecfdf5",
+            dark: "#064e3b",
+          },
+          design: {
+            DEFAULT: "#8b5cf6", // Purple
+            light: "#f3e8ff",
+            dark: "#581c87",
+          },
+          business: {
+            DEFAULT: "#f59e0b", // Orange
+            light: "#fffbeb",
+            dark: "#92400e",
+          },
+          security: {
+            DEFAULT: "#ef4444", // Red
+            light: "#fef2f2",
+            dark: "#991b1b",
+          },
         },
       },
       borderRadius: {

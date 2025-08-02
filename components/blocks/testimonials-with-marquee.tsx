@@ -16,11 +16,46 @@ interface TestimonialsSectionProps {
 }
 
 const categoryStats = {
-  ai: { icon: Brain, label: "AI & ML" },
-  development: { icon: Code, label: "Development" },
-  design: { icon: Palette, label: "Design" },
-  business: { icon: TrendingUp, label: "Business" },
-  security: { icon: Shield, label: "Security" },
+  ai: {
+    icon: Brain,
+    label: "AI & ML",
+    color: "text-category-ai",
+    bg: "bg-category-ai-light dark:bg-category-ai-dark",
+    border: "border-category-ai/30 hover:border-category-ai/50",
+    accent: "bg-category-ai/20",
+  },
+  development: {
+    icon: Code,
+    label: "Development",
+    color: "text-category-development",
+    bg: "bg-category-development-light dark:bg-category-development-dark",
+    border: "border-category-development/30 hover:border-category-development/50",
+    accent: "bg-category-development/20",
+  },
+  design: {
+    icon: Palette,
+    label: "Design",
+    color: "text-category-design",
+    bg: "bg-category-design-light dark:bg-category-design-dark",
+    border: "border-category-design/30 hover:border-category-design/50",
+    accent: "bg-category-design/20",
+  },
+  business: {
+    icon: TrendingUp,
+    label: "Business",
+    color: "text-category-business",
+    bg: "bg-category-business-light dark:bg-category-business-dark",
+    border: "border-category-business/30 hover:border-category-business/50",
+    accent: "bg-category-business/20",
+  },
+  security: {
+    icon: Shield,
+    label: "Security",
+    color: "text-category-security",
+    bg: "bg-category-security-light dark:bg-category-security-dark",
+    border: "border-category-security/30 hover:border-category-security/50",
+    accent: "bg-category-security/20",
+  },
 }
 
 export function TestimonialsSection({ title, description, testimonials, className }: TestimonialsSectionProps) {
@@ -66,20 +101,14 @@ export function TestimonialsSection({ title, description, testimonials, classNam
                   variant="outline"
                   className={cn(
                     "flex items-center gap-2 px-3 py-1.5 text-sm transition-colors duration-300",
-                    `category-${category}`,
-                    "border-[var(--category-color)]/30 bg-[var(--category-bg)] text-[var(--category-color)]",
-                    "hover:border-[var(--category-color)]/50",
+                    config.border,
+                    config.bg,
+                    config.color,
                   )}
                 >
                   <IconComponent className="w-3.5 h-3.5" />
                   <span>{config.label}</span>
-                  <span
-                    className="px-1.5 py-0.5 rounded-full text-xs font-medium"
-                    style={{
-                      backgroundColor: "var(--category-color)/0.2",
-                      color: "var(--category-color)",
-                    }}
-                  >
+                  <span className={cn("px-1.5 py-0.5 rounded-full text-xs font-medium", config.accent, config.color)}>
                     {count}
                   </span>
                 </Badge>

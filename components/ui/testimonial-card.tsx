@@ -23,27 +23,52 @@ const categoryConfig = {
   ai: {
     label: "AI & ML",
     icon: Brain,
-    description: "Artificial Intelligence & Machine Learning",
+    color: "text-category-ai",
+    bg: "bg-category-ai-light dark:bg-category-ai-dark",
+    border: "border-category-ai",
+    ring: "ring-category-ai/20 group-hover:ring-category-ai/40",
+    hover: "hover:border-category-ai hover:text-category-ai",
+    accent: "bg-category-ai",
   },
   development: {
     label: "Development",
     icon: Code,
-    description: "Software Development & Engineering",
+    color: "text-category-development",
+    bg: "bg-category-development-light dark:bg-category-development-dark",
+    border: "border-category-development",
+    ring: "ring-category-development/20 group-hover:ring-category-development/40",
+    hover: "hover:border-category-development hover:text-category-development",
+    accent: "bg-category-development",
   },
   design: {
     label: "Design",
     icon: Palette,
-    description: "UI/UX Design & Creative",
+    color: "text-category-design",
+    bg: "bg-category-design-light dark:bg-category-design-dark",
+    border: "border-category-design",
+    ring: "ring-category-design/20 group-hover:ring-category-design/40",
+    hover: "hover:border-category-design hover:text-category-design",
+    accent: "bg-category-design",
   },
   business: {
     label: "Business",
     icon: TrendingUp,
-    description: "Business Growth & Strategy",
+    color: "text-category-business",
+    bg: "bg-category-business-light dark:bg-category-business-dark",
+    border: "border-category-business",
+    ring: "ring-category-business/20 group-hover:ring-category-business/40",
+    hover: "hover:border-category-business hover:text-category-business",
+    accent: "bg-category-business",
   },
   security: {
     label: "Security",
     icon: Shield,
-    description: "Cybersecurity & Data Protection",
+    color: "text-category-security",
+    bg: "bg-category-security-light dark:bg-category-security-dark",
+    border: "border-category-security",
+    ring: "ring-category-security/20 group-hover:ring-category-security/40",
+    hover: "hover:border-category-security hover:text-category-security",
+    accent: "bg-category-security",
   },
 }
 
@@ -62,12 +87,8 @@ export function TestimonialCard({ author, text, category, href, className }: Tes
         "hover:shadow-lg transition-all duration-500 ease-out",
         "max-w-[320px] sm:max-w-[320px]",
         "relative overflow-hidden",
-        `category-${category}`,
-        // Category-specific hover effects using CSS variables
-        "hover:border-[var(--category-color)] hover:shadow-[var(--category-color)]/10",
-        "hover:from-card hover:via-[var(--category-bg)] hover:to-[var(--category-bg)]",
-        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-[var(--category-color)]/5 before:to-[var(--category-color)]/10 before:opacity-0 before:transition-opacity before:duration-500",
-        "hover:before:opacity-100",
+        config.hover,
+        "hover:shadow-current/10",
         className,
       )}
     >
@@ -77,8 +98,10 @@ export function TestimonialCard({ author, text, category, href, className }: Tes
           variant="secondary"
           className={cn(
             "flex items-center gap-1.5 px-3 py-1 transition-colors duration-300",
-            "bg-[var(--category-bg)] text-[var(--category-color)] border-[var(--category-color)]/20",
-            "hover:bg-[var(--category-color)]/10",
+            config.bg,
+            config.color,
+            config.border + "/20",
+            "hover:bg-current/10",
           )}
         >
           <IconComponent className="w-3 h-3" />
@@ -87,26 +110,17 @@ export function TestimonialCard({ author, text, category, href, className }: Tes
 
         {/* Category accent dot */}
         <div
-          className="w-2 h-2 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ backgroundColor: "var(--category-color)" }}
+          className={cn(
+            "w-2 h-2 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300",
+            config.accent,
+          )}
         />
       </div>
 
       <div className="relative z-10 flex items-center gap-4 mb-4">
-        <Avatar
-          className={cn(
-            "h-14 w-14 ring-2 transition-all duration-300",
-            "ring-[var(--category-color)]/20 group-hover:ring-[var(--category-color)]/40",
-          )}
-        >
+        <Avatar className={cn("h-14 w-14 ring-2 transition-all duration-300", config.ring)}>
           <AvatarImage src={author.avatar || "/placeholder.svg"} alt={author.name} />
-          <AvatarFallback
-            className="font-semibold"
-            style={{
-              backgroundColor: "var(--category-bg)",
-              color: "var(--category-color)",
-            }}
-          >
+          <AvatarFallback className={cn("font-semibold", config.bg, config.color)}>
             {author.name
               .split(" ")
               .map((n) => n[0])
@@ -114,10 +128,20 @@ export function TestimonialCard({ author, text, category, href, className }: Tes
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-col items-start">
-          <h3 className="text-lg font-semibold leading-none text-foreground group-hover:text-[var(--category-color)] transition-colors duration-300">
+          <h3
+            className={cn(
+              "text-lg font-semibold leading-none text-foreground transition-colors duration-300",
+              config.hover.replace("hover:border-", "group-hover:text-").replace(" hover:text-category-", ""),
+            )}
+          >
             {author.name}
           </h3>
-          <p className="text-sm text-muted-foreground mt-1 group-hover:text-[var(--category-color)]/70 transition-colors duration-300">
+          <p
+            className={cn(
+              "text-sm text-muted-foreground mt-1 transition-colors duration-300",
+              config.hover.replace("hover:border-", "group-hover:text-").replace(" hover:text-category-", "") + "/70",
+            )}
+          >
             {author.handle}
           </p>
         </div>
@@ -129,16 +153,19 @@ export function TestimonialCard({ author, text, category, href, className }: Tes
 
       {/* Category-colored accent line */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{
-          background: `linear-gradient(to right, var(--category-color)/0.2, var(--category-color)/0.4, var(--category-color)/0.2)`,
-        }}
+        className={cn(
+          "absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+          "bg-gradient-to-r from-transparent via-current to-transparent",
+          config.color,
+        )}
       />
 
       {/* Subtle category pattern overlay */}
       <div
-        className="absolute top-0 right-0 w-16 h-16 opacity-5 group-hover:opacity-10 transition-opacity duration-500"
-        style={{ color: "var(--category-color)" }}
+        className={cn(
+          "absolute top-0 right-0 w-16 h-16 opacity-5 group-hover:opacity-10 transition-opacity duration-500",
+          config.color,
+        )}
       >
         <IconComponent className="w-full h-full" />
       </div>
