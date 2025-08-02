@@ -37,18 +37,6 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 221 83% 53%;
     --radius: 0.75rem;
-
-    /* Category colors */
-    --category-ai: 221 83% 53%;
-    --category-ai-light: 221 83% 95%;
-    --category-development: 142 76% 36%;
-    --category-development-light: 142 76% 95%;
-    --category-design: 262 83% 58%;
-    --category-design-light: 262 83% 95%;
-    --category-business: 25 95% 53%;
-    --category-business-light: 25 95% 95%;
-    --category-security: 0 72% 51%;
-    --category-security-light: 0 72% 95%;
   }
 
   .dark {
@@ -84,18 +72,6 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 221 83% 63%;
-
-    /* Category colors for dark mode */
-    --category-ai: 221 83% 68%;
-    --category-ai-light: 221 83% 15%;
-    --category-development: 142 76% 46%;
-    --category-development-light: 142 76% 15%;
-    --category-design: 262 83% 68%;
-    --category-design-light: 262 83% 15%;
-    --category-business: 25 95% 63%;
-    --category-business-light: 25 95% 15%;
-    --category-security: 0 72% 61%;
-    --category-security-light: 0 72% 15%;
   }
 }
 
@@ -108,33 +84,98 @@
   }
 }
 
-/* Category-specific utilities */
-@layer utilities {
+/* Category-specific color definitions */
+@layer components {
   .category-ai {
-    --category-color: var(--category-ai);
-    --category-bg: var(--category-ai-light);
+    --category-primary: 221 83% 53%;
+    --category-primary-dark: 221 83% 68%;
+    --category-bg-light: 221 83% 95%;
+    --category-bg-dark: 221 83% 15%;
   }
 
   .category-development {
-    --category-color: var(--category-development);
-    --category-bg: var(--category-development-light);
+    --category-primary: 142 76% 36%;
+    --category-primary-dark: 142 76% 46%;
+    --category-bg-light: 142 76% 95%;
+    --category-bg-dark: 142 76% 15%;
   }
 
   .category-design {
-    --category-color: var(--category-design);
-    --category-bg: var(--category-design-light);
+    --category-primary: 262 83% 58%;
+    --category-primary-dark: 262 83% 68%;
+    --category-bg-light: 262 83% 95%;
+    --category-bg-dark: 262 83% 15%;
   }
 
   .category-business {
-    --category-color: var(--category-business);
-    --category-bg: var(--category-business-light);
+    --category-primary: 25 95% 53%;
+    --category-primary-dark: 25 95% 63%;
+    --category-bg-light: 25 95% 95%;
+    --category-bg-dark: 25 95% 15%;
   }
 
   .category-security {
-    --category-color: var(--category-security);
-    --category-bg: var(--category-security-light);
+    --category-primary: 0 72% 51%;
+    --category-primary-dark: 0 72% 61%;
+    --category-bg-light: 0 72% 95%;
+    --category-bg-dark: 0 72% 15%;
   }
 
+  /* Light mode category colors */
+  .category-ai {
+    --category-color: hsl(var(--category-primary));
+    --category-bg: hsl(var(--category-bg-light));
+  }
+
+  .category-development {
+    --category-color: hsl(var(--category-primary));
+    --category-bg: hsl(var(--category-bg-light));
+  }
+
+  .category-design {
+    --category-color: hsl(var(--category-primary));
+    --category-bg: hsl(var(--category-bg-light));
+  }
+
+  .category-business {
+    --category-color: hsl(var(--category-primary));
+    --category-bg: hsl(var(--category-bg-light));
+  }
+
+  .category-security {
+    --category-color: hsl(var(--category-primary));
+    --category-bg: hsl(var(--category-bg-light));
+  }
+
+  /* Dark mode category colors */
+  .dark .category-ai {
+    --category-color: hsl(var(--category-primary-dark));
+    --category-bg: hsl(var(--category-bg-dark));
+  }
+
+  .dark .category-development {
+    --category-color: hsl(var(--category-primary-dark));
+    --category-bg: hsl(var(--category-bg-dark));
+  }
+
+  .dark .category-design {
+    --category-color: hsl(var(--category-primary-dark));
+    --category-bg: hsl(var(--category-bg-dark));
+  }
+
+  .dark .category-business {
+    --category-color: hsl(var(--category-primary-dark));
+    --category-bg: hsl(var(--category-bg-dark));
+  }
+
+  .dark .category-security {
+    --category-color: hsl(var(--category-primary-dark));
+    --category-bg: hsl(var(--category-bg-dark));
+  }
+}
+
+/* Brand gradient utilities */
+@layer utilities {
   .bg-brand-gradient {
     background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
   }
@@ -144,5 +185,22 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  /* Category-specific utilities */
+  .bg-category-color {
+    background-color: var(--category-color);
+  }
+
+  .text-category-color {
+    color: var(--category-color);
+  }
+
+  .border-category-color {
+    border-color: var(--category-color);
+  }
+
+  .bg-category-bg {
+    background-color: var(--category-bg);
   }
 }

@@ -59,14 +59,15 @@ export function TestimonialCard({ author, text, category, href, className }: Tes
         "group flex flex-col rounded-xl border border-border/50",
         "bg-gradient-to-br from-card via-card to-muted/20",
         "p-6 text-start",
-        "hover:border-[hsl(var(--category-color))] hover:shadow-lg hover:shadow-[hsl(var(--category-color))]/10",
-        "hover:from-card hover:via-[hsl(var(--category-bg))] hover:to-[hsl(var(--category-bg))]",
+        "hover:shadow-lg transition-all duration-500 ease-out",
         "max-w-[320px] sm:max-w-[320px]",
-        "transition-all duration-500 ease-out",
         "relative overflow-hidden",
-        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-[hsl(var(--category-color))]/5 before:to-[hsl(var(--category-color))]/10 before:opacity-0 before:transition-opacity before:duration-500",
-        "hover:before:opacity-100",
         `category-${category}`,
+        // Category-specific hover effects using CSS variables
+        "hover:border-[var(--category-color)] hover:shadow-[var(--category-color)]/10",
+        "hover:from-card hover:via-[var(--category-bg)] hover:to-[var(--category-bg)]",
+        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-[var(--category-color)]/5 before:to-[var(--category-color)]/10 before:opacity-0 before:transition-opacity before:duration-500",
+        "hover:before:opacity-100",
         className,
       )}
     >
@@ -75,9 +76,9 @@ export function TestimonialCard({ author, text, category, href, className }: Tes
         <Badge
           variant="secondary"
           className={cn(
-            "bg-[hsl(var(--category-bg))] text-[hsl(var(--category-color))] border-[hsl(var(--category-color))]/20",
-            "hover:bg-[hsl(var(--category-color))]/10 transition-colors duration-300",
-            "flex items-center gap-1.5 px-3 py-1",
+            "flex items-center gap-1.5 px-3 py-1 transition-colors duration-300",
+            "bg-[var(--category-bg)] text-[var(--category-color)] border-[var(--category-color)]/20",
+            "hover:bg-[var(--category-color)]/10",
           )}
         >
           <IconComponent className="w-3 h-3" />
@@ -85,18 +86,26 @@ export function TestimonialCard({ author, text, category, href, className }: Tes
         </Badge>
 
         {/* Category accent dot */}
-        <div className="w-2 h-2 rounded-full bg-[hsl(var(--category-color))] opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+        <div
+          className="w-2 h-2 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+          style={{ backgroundColor: "var(--category-color)" }}
+        />
       </div>
 
       <div className="relative z-10 flex items-center gap-4 mb-4">
         <Avatar
           className={cn(
-            "h-14 w-14 ring-2 ring-[hsl(var(--category-color))]/20 group-hover:ring-[hsl(var(--category-color))]/40 transition-all duration-300",
+            "h-14 w-14 ring-2 transition-all duration-300",
+            "ring-[var(--category-color)]/20 group-hover:ring-[var(--category-color)]/40",
           )}
         >
           <AvatarImage src={author.avatar || "/placeholder.svg"} alt={author.name} />
           <AvatarFallback
-            className={cn("bg-[hsl(var(--category-bg))] text-[hsl(var(--category-color))] font-semibold")}
+            className="font-semibold"
+            style={{
+              backgroundColor: "var(--category-bg)",
+              color: "var(--category-color)",
+            }}
           >
             {author.name
               .split(" ")
@@ -105,10 +114,10 @@ export function TestimonialCard({ author, text, category, href, className }: Tes
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-col items-start">
-          <h3 className="text-lg font-semibold leading-none text-foreground group-hover:text-[hsl(var(--category-color))] transition-colors duration-300">
+          <h3 className="text-lg font-semibold leading-none text-foreground group-hover:text-[var(--category-color)] transition-colors duration-300">
             {author.name}
           </h3>
-          <p className="text-sm text-muted-foreground mt-1 group-hover:text-[hsl(var(--category-color))]/70 transition-colors duration-300">
+          <p className="text-sm text-muted-foreground mt-1 group-hover:text-[var(--category-color)]/70 transition-colors duration-300">
             {author.handle}
           </p>
         </div>
@@ -120,16 +129,18 @@ export function TestimonialCard({ author, text, category, href, className }: Tes
 
       {/* Category-colored accent line */}
       <div
-        className={cn(
-          "absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r",
-          "from-[hsl(var(--category-color))]/20 via-[hsl(var(--category-color))]/40 to-[hsl(var(--category-color))]/20",
-          "opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-        )}
+        className="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: `linear-gradient(to right, var(--category-color)/0.2, var(--category-color)/0.4, var(--category-color)/0.2)`,
+        }}
       />
 
       {/* Subtle category pattern overlay */}
-      <div className="absolute top-0 right-0 w-16 h-16 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
-        <IconComponent className="w-full h-full text-[hsl(var(--category-color))]" />
+      <div
+        className="absolute top-0 right-0 w-16 h-16 opacity-5 group-hover:opacity-10 transition-opacity duration-500"
+        style={{ color: "var(--category-color)" }}
+      >
+        <IconComponent className="w-full h-full" />
       </div>
     </Card>
   )

@@ -16,11 +16,11 @@ interface TestimonialsSectionProps {
 }
 
 const categoryStats = {
-  ai: { icon: Brain, label: "AI & ML", color: "hsl(var(--category-ai))" },
-  development: { icon: Code, label: "Development", color: "hsl(var(--category-development))" },
-  design: { icon: Palette, label: "Design", color: "hsl(var(--category-design))" },
-  business: { icon: TrendingUp, label: "Business", color: "hsl(var(--category-business))" },
-  security: { icon: Shield, label: "Security", color: "hsl(var(--category-security))" },
+  ai: { icon: Brain, label: "AI & ML" },
+  development: { icon: Code, label: "Development" },
+  design: { icon: Palette, label: "Design" },
+  business: { icon: TrendingUp, label: "Business" },
+  security: { icon: Shield, label: "Security" },
 }
 
 export function TestimonialsSection({ title, description, testimonials, className }: TestimonialsSectionProps) {
@@ -65,15 +65,21 @@ export function TestimonialsSection({ title, description, testimonials, classNam
                   key={category}
                   variant="outline"
                   className={cn(
-                    "flex items-center gap-2 px-3 py-1.5 text-sm",
+                    "flex items-center gap-2 px-3 py-1.5 text-sm transition-colors duration-300",
                     `category-${category}`,
-                    "border-[hsl(var(--category-color))]/30 bg-[hsl(var(--category-bg))] text-[hsl(var(--category-color))]",
-                    "hover:border-[hsl(var(--category-color))]/50 transition-colors duration-300",
+                    "border-[var(--category-color)]/30 bg-[var(--category-bg)] text-[var(--category-color)]",
+                    "hover:border-[var(--category-color)]/50",
                   )}
                 >
                   <IconComponent className="w-3.5 h-3.5" />
                   <span>{config.label}</span>
-                  <span className="bg-[hsl(var(--category-color))]/20 text-[hsl(var(--category-color))] px-1.5 py-0.5 rounded-full text-xs font-medium">
+                  <span
+                    className="px-1.5 py-0.5 rounded-full text-xs font-medium"
+                    style={{
+                      backgroundColor: "var(--category-color)/0.2",
+                      color: "var(--category-color)",
+                    }}
+                  >
                     {count}
                   </span>
                 </Badge>
